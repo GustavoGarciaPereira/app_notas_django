@@ -1,0 +1,91 @@
+# Arquivos do Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Diretórios de ambiente virtual
+venv/
+env/
+.venv/
+ENV/
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de log e cache
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Arquivos de mídia e estáticos
+/media/
+/staticfiles/
+/static/
+
+# Arquivos de configuração sensíveis
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+secrets.json
+
+# Arquivos de banco de dados
+*.sql
+*.sqlite
+
+# Arquivos de migração (opcional, dependendo do fluxo de trabalho)
+/migrations/
+
+# Arquivos de build e distribuição
+/dist/
+/build/
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de cache do Python
+.pytest_cache/
+.mypy_cache/
+
+# Arquivos de cobertura de testes
+.coverage
+htmlcov/
+
+# Arquivos do Node.js (se houver)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos do Docker (se houver)
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+.dockerignore
+
+# Arquivos do Celery (se houver)
+celerybeat-schedule
+celerybeat.pid
+
+# Arquivos do PyCharm
+.idea/
+*.iml
+
+# Arquivos do VS Code
+.vscode/

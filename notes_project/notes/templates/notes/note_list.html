@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="my-4">Minhas Notas</h2>
+    <a href="{% url 'note-create' %}" class="btn btn-primary mb-3">Nova Nota</a>
+    
+    <div class="list-group">
+        {% for note in object_list %}
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>
+                            {{ note.title }}
+                            <!-- Exibe o nome do criador da nota, exceto se for o próprio usuário -->
+                            {% if note.owner != request.user %}
+                                <small class="text-muted">(Criada por: {{ note.owner.username }})</small>
+                            {% endif %}
+                        </h5>
+                        <p>{{ note.content }}</p>
+                        <small class="text-muted">{{ note.updated_at }}</small>
+                    </div>
+                    <div>
+                        <!-- Verifica se o usuário logado é o proprietário da nota -->
+                        {% if note.owner == request.user %}
+                            <a href="{% url 'note-share' note.pk %}" class="btn btn-sm btn-outline-secondary">Compartilhar</a>
+                            <a href="{% url 'note-update' note.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                            <a href="{% url 'note-delete' note.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Nenhuma nota encontrada.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

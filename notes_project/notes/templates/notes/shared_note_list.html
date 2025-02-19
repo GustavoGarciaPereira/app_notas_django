@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="my-4">Notas Compartilhadas</h2>
+<div class="row" id="shared-notes-container">
+    {% for shared_note in object_list %}
+    <div class="col-md-6 mb-4">
+        <div class="card {% if shared_note.is_expired %}bg-light{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">{{ shared_note.note.title }}</h5>
+                <p class="card-text">{{ shared_note.note.content }}</p>
+                <div class="text-muted small">
+                    <span class="expiration-counter" data-expiration="{{ shared_note.expiration_date|date:'U' }}"></span>
+                    {% if shared_note.is_expired %}
+                    <span class="text-danger">(Expirada)</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhuma nota compartilhada encontrada.</p>
+    {% endfor %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function updateCounters() {
+        document.querySelectorAll('.expiration-counter').forEach(element => {
+            const expiration = parseInt(element.dataset.expiration);
+            const now = Math.floor(Date.now() / 1000);
+            const diff = expiration - now;
+
+            if (diff <= 0) {
+                element.textContent = 'Expirada';
+                return;
+            }
+
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = diff % 60;
+
+            element.textContent = `Expira em: ${hours}h ${minutes}m ${seconds}s`;
+        });
+    }
+
+    setInterval(updateCounters, 1000);
+    updateCounters();
+});
+</script>
+{% endblock %}
